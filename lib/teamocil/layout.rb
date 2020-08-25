@@ -4,7 +4,12 @@ module Teamocil
       if Teamocil.options[:debug]
         Teamocil.puts(shell_commands.join("\n"))
       else
-        Teamocil.system(shell_commands.join('; '))
+        is_session_available = Teamocil.system(shell_commands[0])
+        if is_session_available then
+          Teamocil.system(shell_commands[1..].join('; '))
+        else
+          raise "Duplicate session can't complete operation."
+        end
       end
     end
 
@@ -42,7 +47,9 @@ module Teamocil
     end
 
     def parsed_content
-      YAML.load(raw_content)
+      data = YAML.load(raw_content)
+      d2 = substitue_args(data)
+      data
     rescue Psych::SyntaxError
       raise Teamocil::Error::InvalidYAMLLayout, path
     end
@@ -52,5 +59,15 @@ module Teamocil
     rescue Errno::ENOENT
       raise Teamocil::Error::LayoutNotFound, path
     end
+
+    def substitue_args(data)
+      args_substituter = ArgumentSubstitute.new
+      if Teamocil.options[:c_args]
+        c_args = YAML.load(Teamocil.options[:c_args])
+        data['windows'].each { |k| k['panes'].each { |v| if v.class == Hash then v['commands'].each {|command| args_substituter.sub_all(command, c_args) } else args_substituter.sub_all(v, c_args) end}}
+      end
+      puts data.inspect
+    end
+
   end
 end
