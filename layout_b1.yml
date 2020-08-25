@@ -1,0 +1,13 @@
+windows:
+  - name: sample-four-panes
+    root: ~/projects
+    layout: tiled
+    panes:
+      - vim
+      - help
+      - commands:
+        - help
+        - pwd
+        - cat [file_name].txt
+      - vim [file_name].txt
+      - status
