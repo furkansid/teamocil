@@ -234,7 +234,7 @@ windows:
       - status
 ```
 
-`**bin/teamocil --layout layout_b1.yml --session your_session_name --c_args "{file_name: info_name}"**`
+`bin/teamocil --layout layout_b1.yml --session your_session_name --c_args "{file_name: info_name}"`
 
 **Above command will replace [file_name].txt to info_name.txt  & will create a new-session**
 
