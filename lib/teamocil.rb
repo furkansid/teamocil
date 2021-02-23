@@ -7,6 +7,7 @@ require 'teamocil/version'
 # Utils
 require 'teamocil/utils/closed_struct'
 require 'teamocil/utils/option_parser'
+require 'teamocil/utils/args_substitute'
 
 # Teamocil
 require 'teamocil/layout'
@@ -20,6 +21,8 @@ require 'teamocil/error/invalid_yaml_layout'
 require 'teamocil/command/list_panes'
 require 'teamocil/command/list_windows'
 require 'teamocil/command/new_window'
+require 'teamocil/command/create_session'
+require 'teamocil/command/switch_session'
 require 'teamocil/command/rename_session'
 require 'teamocil/command/rename_window'
 require 'teamocil/command/select_layout'
@@ -40,7 +43,7 @@ require 'teamocil/tmux/pane'
 
 module Teamocil
   class << self
-    attr_reader :options
+    attr_reader :options, :session
   end
 
   def self.bail(*args)
@@ -64,5 +67,6 @@ module Teamocil
   def self.parse_options!(arguments: nil)
     parser = OptionParser.new(arguments: arguments)
     @options = parser.parsed_options
+    @session = @options[:session]
   end
 end

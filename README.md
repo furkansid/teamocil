@@ -11,6 +11,17 @@
 
 ---
 
+## Important
+Features is in beta testing, with limited.
+Once stable and code cleaned up, will submit pull request
+below new features
+
+## Features
+1. support session -> will deploy on given session can be provide with --session session_name
+2. Command substituion -> will substitue command with given c_args json format (see layout_b1.yml)
+
+
+
 ## Installation
 
 ```bash
