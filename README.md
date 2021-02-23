@@ -52,6 +52,8 @@ $ teamocil [options] [layout-name]
 | Option      | Description
 |-------------|----------------------------
 | `--list`    | Lists all available layouts in `~/.teamocil`
+| `--session`    | Name your tmux session new session will be created.
+| `--c_args`    | pass json to substitute your command see `layout_b1.yml`
 
 ### Layout options
 
@@ -104,7 +106,7 @@ treat it as a single-command pane.
 
 | Key        | Description
 |------------|----------------------------
-| `commands` | An `Array` of commands that will be ran when the pane is created
+| `commands` | An `Array` of commands that will be ran when the pane is created also command can be have variable which can be substitute by c_args
 | `focus`    | If set to `true`, the pane will be selected after the layout has been executed
 
 ## Examples
@@ -219,6 +221,28 @@ windows:
 |                  |                  |
 '------------------'------------------'
 ```
+
+### Sample pane with command substitute
+```yaml
+windows:
+  - name: sample-four-panes
+    root: ~/projects
+    layout: tiled
+    panes:
+      - vim
+      - help
+      - commands:
+        - help
+        - pwd
+        - cat [file_name].txt
+      - vim [file_name].txt
+      - status
+```
+
+**bin/teamocil --layout layout_b1.yml --session your_session_name --c_args "{file_name: info_name}"
+
+**Above command will replace [file_name].txt to info_name.txt  & will create a new-session****
+
 
 ## Extras
 
