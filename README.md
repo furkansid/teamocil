@@ -11,22 +11,23 @@
 
 ---
 
-## Important
-Features is in beta testing, with limited.
-Once stable and code cleaned up, will submit pull request
-below new features
-
-## Features
-1. support session -> will deploy on given session can be provide with --session session_name
-2. Command substituion -> will substitue command with given c_args json format (see layout_b1.yml)
+## New Features 
+1. Session name can be provide to create new session instead of deploying thing on same session by `--session` argument. (See below example Z.01)
+2. Command can have variable and those variable will be substituted by passing json with `--c_args` argument. See below explample Z.01)
 
 
 
 ## Installation
 
 ```bash
-# Install the `teamocil` Ruby gem
-$ gem install teamocil
+# Install the `teamocil` github repo.
+$ wget https://github.com/furkansid/teamocil.git
+$ git checkout master
+
+# softlink your bin/teamocil as your choice 
+# Else remain same
+
+
 
 # Create your layout directory
 $ mkdir ~/.teamocil
@@ -222,7 +223,7 @@ windows:
 '------------------'------------------'
 ```
 
-### Sample pane with command substitute
+### Z.01 Sample pane with command substitute
 ```yaml
 windows:
   - name: sample-four-panes
@@ -239,9 +240,9 @@ windows:
       - status
 ```
 
-**bin/teamocil --layout layout_b1.yml --session your_session_name --c_args "{file_name: info_name}"
+`bin/teamocil --layout layout_b1.yml --session your_session_name --c_args "{file_name: info_name}"`
 
-**Above command will replace [file_name].txt to info_name.txt  & will create a new-session****
+**Above command will replace [file_name].txt to info_name.txt  & will create a new-session**
 
 
 ## Extras
