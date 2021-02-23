@@ -20,8 +20,14 @@
 ## Installation
 
 ```bash
-# Install the `teamocil` Ruby gem
-$ gem install teamocil
+# Install the `teamocil` github repo.
+$ wget https://github.com/furkansid/teamocil.git
+$ git checkout master
+
+# softlink your bin/teamocil as your choice 
+# Else remain same
+
+
 
 # Create your layout directory
 $ mkdir ~/.teamocil
